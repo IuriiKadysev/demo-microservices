@@ -1,6 +1,6 @@
 package com.example.demoservicedelivery.repository;
 
-import com.example.demoservicedelivery.model.Order;
+import com.example.demoservicedelivery.model.OrderDelivery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,34 +19,34 @@ public class DeliveryDaoImpl implements DeliveryDao {
     }
 
     @Override
-    public void save(Order order) {
-        entityManager.merge(order);
+    public void save(OrderDelivery orderDelivery) {
+        entityManager.persist(orderDelivery);
     }
 
     @Override
-    public Order getById(Long id) {
-        Query query = entityManager.createQuery("from Order where id = :id");
+    public OrderDelivery getById(Long id) {
+        Query query = entityManager.createQuery("from OrderDelivery where id = :id");
         query.setParameter("id", id);
-        return (Order) query.getSingleResult();
+        return (OrderDelivery) query.getSingleResult();
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Order> getNew() {
-        TypedQuery<Order> query = (TypedQuery<Order>) entityManager.createQuery("from Order where orderCompleted = false");
+    public List<OrderDelivery> getNew() {
+        TypedQuery<OrderDelivery> query = (TypedQuery<OrderDelivery>) entityManager.createQuery("from OrderDelivery where orderCompleted = false");
         return query.getResultList();
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Order> getCompleted() {
-        TypedQuery<Order> query = (TypedQuery<Order>) entityManager.createQuery("from Order where orderCompleted = true");
+    public List<OrderDelivery> getCompleted() {
+        TypedQuery<OrderDelivery> query = (TypedQuery<OrderDelivery>) entityManager.createQuery("from Order where orderCompleted = true");
         return query.getResultList();
     }
 
     @Override
-    public void update(Order order) {
-        entityManager.merge(order);
+    public void update(OrderDelivery orderDelivery) {
+        entityManager.merge(orderDelivery);
     }
 
     @Override

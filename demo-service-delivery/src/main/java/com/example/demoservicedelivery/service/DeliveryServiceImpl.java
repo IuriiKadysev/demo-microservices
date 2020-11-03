@@ -1,6 +1,6 @@
 package com.example.demoservicedelivery.service;
 
-import com.example.demoservicedelivery.model.Order;
+import com.example.demoservicedelivery.model.OrderDelivery;
 import com.example.demoservicedelivery.repository.DeliveryDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,40 +22,40 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Transactional
     @Override
-    public void addOrderList(List<Order> orderList) {
-        for (Order order: orderList) {
-            deliveryDao.save(order);
+    public void addOrderList(List<OrderDelivery> orderList) {
+        for (OrderDelivery orderDelivery: orderList) {
+            deliveryDao.save(orderDelivery);
         }
         log.info("Add order list to delivery Repository: {}", orderList.toString());
     }
 
     @Transactional
     @Override
-    public void completeOrderList(List<Order> orderList) {
+    public void completeOrderList(List<OrderDelivery> orderList) {
 
     }
 
     @Transactional
     @Override
-    public void updateOrder(Order order) {
-        deliveryDao.update(order);
+    public void updateOrder(OrderDelivery orderDelivery) {
+        deliveryDao.update(orderDelivery);
     }
 
     @Transactional
     @Override
-    public List<Order> getNewOrders() {
+    public List<OrderDelivery> getNewOrders() {
         return deliveryDao.getNew();
     }
 
     @Transactional
     @Override
-    public List<Order> getCompletedOrders() {
+    public List<OrderDelivery> getCompletedOrders() {
         return deliveryDao.getCompleted();
     }
 
     @Transactional
     @Override
-    public List<Order> getAllOrders() {
+    public List<OrderDelivery> getAllOrders() {
         return null;
     }
 

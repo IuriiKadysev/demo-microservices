@@ -1,6 +1,7 @@
 package com.example.demoservicedelivery.controller;
 
-import com.example.demoservicedelivery.model.Order;
+import com.example.demoservicedelivery.model.OrderDto;
+import com.example.demoservicedelivery.service.DeliveryCourierService;
 import com.example.demoservicedelivery.service.DeliveryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +21,20 @@ public class DeliveryController {
 
     private final OrderClient orderClient;
 
+    private final DeliveryCourierService deliveryCourierService;
+
     @Autowired
-    public DeliveryController(DeliveryService deliveryService, OrderClient orderClient) {
+    public DeliveryController(DeliveryService deliveryService, OrderClient orderClient, DeliveryCourierService deliveryCourierService) {
         this.deliveryService = deliveryService;
         this.orderClient = orderClient;
-    }
-
-    @GetMapping("/get-new")
-    public ResponseEntity<List<Order>> getNewOrders() {
-        List<Order> orders = orderClient.getNewOrders();
-        log.info("New orders from OrderClient {}", orders.size());
-        deliveryService.addOrderList(orders);
-        return ResponseEntity.ok(orders);
+        this.deliveryCourierService = deliveryCourierService;
     }
 
     @GetMapping("/accept-order")
-    public ResponseEntity<?> orderAccept() {
-        List<Order> orders = orderClient.getNewOrders();
-        deliveryService.addOrderList(orders);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<OrderDto>> getNewOrders() {
+        List<OrderDto> ordersDto = deliveryCourierService.orderDeliveryCourier(orderClient.getNewOrders());
+        log.info("New ordersDto from OrderClient {}", ordersDto.size());
+        return ResponseEntity.ok(ordersDto);
     }
+
 }

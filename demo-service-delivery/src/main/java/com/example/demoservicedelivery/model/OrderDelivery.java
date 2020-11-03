@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 @Table(name = "order_delivery")
-public class Order {
+public class OrderDelivery {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -27,19 +27,23 @@ public class Order {
     @Column(name = "order_to")
     private String orderTo;
 
-    @Column(name = "order_time_created")
-    private LocalDateTime orderTimeCreated;
+    @Column(name = "courier_name")
+    private String courierName;
 
     @Column(name = "order_time_completed")
     private LocalDateTime orderTimeCompleted;
 
-    @Column(name = "order_completed")
-    private boolean orderCompleted;
-
-    public Order(String orderName, String orderFrom, String orderTo, LocalDateTime orderTimeCreated) {
+    public OrderDelivery(String orderName, String orderFrom, String orderTo) {
         this.orderName = orderName;
         this.orderFrom = orderFrom;
         this.orderTo = orderTo;
-        this.orderTimeCreated = orderTimeCreated;
+    }
+
+    public OrderDelivery(String orderName, String orderFrom, String orderTo, String courierName, LocalDateTime orderTimeCompleted) {
+        this.orderName = orderName;
+        this.orderFrom = orderFrom;
+        this.orderTo = orderTo;
+        this.courierName = courierName;
+        this.orderTimeCompleted = orderTimeCompleted;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api/orderDtos")
 @Slf4j
 public class OrderController {
 
@@ -24,14 +24,14 @@ public class OrderController {
     @GetMapping("/get-new")
     public ResponseEntity<List<Order>> getNewOrders() {
         List<Order> orderList = orderService.getNewOrders();
-        log.info("List new orders size: {}", orderList.size());
+        log.info("List new orderDtos size: {}", orderList.size());
         return ResponseEntity.ok(orderList);
     }
 
     @GetMapping("/get-all")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orderList = orderService.getAllOrders();
-        log.info("List all orders size: {}", orderList.size());
+        log.info("List all orderDtos size: {}", orderList.size());
         return ResponseEntity.ok(orderList);
     }
 

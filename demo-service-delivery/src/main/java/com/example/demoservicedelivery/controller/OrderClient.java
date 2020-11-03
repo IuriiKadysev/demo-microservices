@@ -1,17 +1,17 @@
 package com.example.demoservicedelivery.controller;
 
-import com.example.demoservicedelivery.model.Order;
+import com.example.demoservicedelivery.model.OrderDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@FeignClient(name = "service-order", url = "http://localhost:8000")
+@FeignClient("service-order")
 public interface OrderClient {
-    @GetMapping("/api/orders/get-new")
-    List<Order> getNewOrders();
+    @GetMapping("/api/orderDtos/get-new")
+    List<OrderDto> getNewOrders();
 
-    @PostMapping("/api/orders/mark-done")
-    String markOrdersDone(List<Order> orderList);
+    @PostMapping("/api/orderDtos/mark-done")
+    String markOrdersDone(List<OrderDto> orderDtoList);
 }
